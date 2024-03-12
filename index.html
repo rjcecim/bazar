@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leitor de QR Code</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 20px; }
+        #qr-reader { width: 300px; height: 300px; margin: auto; }
+        #qr-result { margin-top: 20px; }
+        #json-output, #save-confirmation { margin-top: 20px; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <button id="btn-scan-qr">Ler QR Code</button>
+    <div id="qr-reader" style="width:300px; height:300px; margin:auto;"></div>
+    <div id="qr-result">Resultado: <span id="output"></span></div>
+    <div id="json-output"></div>
+    <div id="save-confirmation"></div>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="app.js"></script>
+</body>
+</html>
