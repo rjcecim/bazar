@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leitor de QR Code</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 20px; }
-        #qr-reader { width: 300px; height: 300px; margin: auto; }
-        #qr-result { margin-top: 20px; }
-        #json-output, #save-confirmation { margin-top: 20px; word-wrap: break-word; }
+        /* Estilização básica */
+        body { text-align: center; margin-top: 20px; }
+        #videoElement { width: 70%; }
     </style>
 </head>
 <body>
-    <button id="btn-scan-qr">Ler QR Code</button>
-    <div id="qr-reader" style="width:300px; height:300px; margin:auto;"></div>
-    <div id="qr-result">Resultado: <span id="output"></span></div>
-    <div id="json-output"></div>
-    <div id="save-confirmation"></div>
-    <script src="https://unpkg.com/html5-qrcode"></script>
-    <script src="app.js"></script>
+    <video id="videoElement" playsinline></video>
+    <p id="qrText">Texto do QR Code aparecerá aqui</p>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@latest"></script>
+    <script>
+        // JavaScript para capturar vídeo e decodificar QR Code
+    </script>
 </body>
 </html>
