@@ -15,7 +15,40 @@
     <p id="qrText">Texto do QR Code aparecerá aqui</p>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@latest"></script>
     <script>
-        // JavaScript para capturar vídeo e decodificar QR Code
+        const videoElement = document.getElementById('videoElement');
+const canvasElement = document.createElement('canvas');
+const qrText = document.getElementById('qrText');
+
+navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+    .then(function(stream) {
+        videoElement.srcObject = stream;
+        videoElement.setAttribute("playsinline", true); // necessário para iPhones
+        videoElement.play();
+        requestAnimationFrame(tick);
+    });
+
+function tick() {
+    if (videoElement.readyState === videoElement.HAVE_ENOUGH_DATA) {
+        canvasElement.height = videoElement.videoHeight;
+        canvasElement.width = videoElement.videoWidth;
+        const ctx = canvasElement.getContext('2d');
+        ctx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+        const imageData = ctx.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height, {
+            inversionAttempts: "dontInvert",
+        });
+        if (code) {
+            qrText.textContent = code.data;
+            // Para de escanear após o primeiro QR Code ser detectado
+            videoElement.srcObject.getTracks().forEach(track => track.stop());
+        } else {
+            requestAnimationFrame(tick); // Continue tentando ler QR Codes
+        }
+    } else {
+        requestAnimationFrame(tick);
+    }
+}
+
     </script>
 </body>
 </html>
